@@ -1,7 +1,12 @@
-import MoodList from "@/components/mood-list";
+import { Metadata } from "next";
+import MoodForm from "@/components/mood-form";
 import { Suspense } from "react";
 
-export default function Mood() {
+export const metadata: Metadata = {
+  title: "Tambah",
+};
+
+export default function MoodCreate() {
   return (
     <div className="min-h-screen bg-slate-50 text-gray-900">
       <div className="max-w-screen-lg mx-auto py-20 px-4">
@@ -9,7 +14,7 @@ export default function Mood() {
           Bagaimana kabarmu sekarang?
         </h1>
         <Suspense fallback={<p>loading...</p>}>
-          <MoodList />
+          <MoodForm />
         </Suspense>
       </div>
     </div>
