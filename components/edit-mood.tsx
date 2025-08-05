@@ -4,9 +4,16 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useMoodStore } from "@/lib/action";
 import clsx from "clsx";
-import { moodData } from "@/app/data";
+import { moodData, emosiData, cuacaData } from "@/app/data";
+import { MoodIcon, CuacaIcon, EmosiIcon } from "@/components/mood-icons";
 
-export default function MoodEditForm({ id }: { id: string }) {
+export default function MoodEditForm({
+  id,
+  onSuccess,
+}: {
+  id: string;
+  onSuccess?: () => void;
+}) {
   const moods = useMoodStore((state) => state.moods);
   const mood = moods.find((item) => item.id === id);
 
@@ -41,6 +48,9 @@ export default function MoodEditForm({ id }: { id: string }) {
           })
         : "";
       const result = updateMood(id, jam, tanggal, formData);
+      if (!result.error && onSuccess) {
+        onSuccess();
+      }
       return result.error || null;
     },
     null
@@ -122,7 +132,7 @@ export default function MoodEditForm({ id }: { id: string }) {
           <label className="block mb-2 text-sm font-medium text-gray-900">
             Mood
           </label>
-          <div className="grid md:grid-cols-5">
+          <div className="grid grid-cols-5">
             {moodData.map((item) => (
               <div key={item.id} className="flex items-center mb-4">
                 <input
@@ -131,13 +141,31 @@ export default function MoodEditForm({ id }: { id: string }) {
                   id={`mood-${item.id}`}
                   value={item.id}
                   defaultChecked={String(mood?.mood) === String(item.id)}
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border border-gray-400"
+                  className="sr-only peer/mood"
                 />
+
                 <label
-                  className="ms-2 text-sm font-medium text-gray-900 capitalize"
                   htmlFor={`mood-${item.id}`}
+                  className={clsx(
+                    "cursor-pointer flex flex-col items-center justify-center gap-1 border rounded-lg px-2 py-1 transition peer-checked/mood:ring-2 peer-checked/mood:ring-offset-2 ",
+                    {
+                      "text-[#44c5a6] peer-checked/mood:ring-[#44c5a6]":
+                        item.id === 1,
+                      "text-[#a4d756] peer-checked/mood:ring-[#a4d756]":
+                        item.id === 2,
+                      "text-[#71b5dc] peer-checked/mood:ring-[#71b5dc]":
+                        item.id === 3,
+                      "text-[#f9a44a] peer-checked/mood:ring-[#f9a44a]":
+                        item.id === 4,
+                      "text-[#f5586b] peer-checked/mood:ring-[#f5586b]":
+                        item.id === 5,
+                    }
+                  )}
                 >
-                  {item.name}
+                  <MoodIcon mood={item.id} className="size-10 md:text-3xl" />
+                  <span className="capitalize text-sm w-[80%] text-center">
+                    {item.name}
+                  </span>
                 </label>
               </div>
             ))}
@@ -151,10 +179,103 @@ export default function MoodEditForm({ id }: { id: string }) {
               ))}
           </div>
         </div>
+
+        {/* Cuaca */}
+        <div className="mb-4">
+          <label className="block mb-2 text-sm font-medium text-gray-900">
+            Cuaca
+          </label>
+          <div className="grid grid-cols-5 gap-3">
+            {cuacaData.map((item) => (
+              <div key={item.id} className="flex flex-col items-center mb-4">
+                <input
+                  type="checkbox"
+                  name="cuaca"
+                  id={`cuaca-${item.id}`}
+                  value={item.id}
+                  defaultChecked={mood?.cuaca?.includes(String(item.id))}
+                  className="sr-only peer/cuaca"
+                />
+
+                <label
+                  htmlFor={`cuaca-${item.id}`}
+                  className="cursor-pointer flex justify-center p-3 md:text-3xl border border-gray-300 transition duration-300 rounded-full hadow bg-white text-[#44c5a6] peer-checked/cuaca:bg-[#44c5a6] peer-checked/cuaca:text-white"
+                >
+                  <CuacaIcon cuaca={item.id} className="size-8" />
+                </label>
+                <label htmlFor={`cuaca-${item.id}`}>
+                  <span className="capitalize text-sm w-[80%] text-center text-[#44c5a6]">
+                    {item.name}
+                  </span>
+                </label>
+              </div>
+            ))}
+
+            {/* Error */}
+            {state &&
+              typeof state === "object" &&
+              Array.isArray(state.cuaca) &&
+              state.cuaca.map((msg, idx) => (
+                <span
+                  key={"cuaca" + idx}
+                  className="text-sm text-red-500 mx-2 contents"
+                >
+                  Pilih cuaca
+                </span>
+              ))}
+          </div>
+        </div>
+
+        {/* Emosi */}
+        <div className="mb-4">
+          <label className="block mb-2 text-sm font-medium text-gray-900">
+            Emosi
+          </label>
+          <div className="grid grid-cols-5 gap-3">
+            {emosiData.map((item) => (
+              <div key={item.id} className="flex flex-col items-center mb-4">
+                <input
+                  type="checkbox"
+                  name="emosi"
+                  id={`emosi-${item.id}`}
+                  value={item.id}
+                  defaultChecked={mood?.emosi?.includes(String(item.id))}
+                  className="sr-only peer/emosi"
+                />
+
+                <label
+                  htmlFor={`emosi-${item.id}`}
+                  className="cursor-pointer flex justify-center p-3 md:text-3xl border border-gray-300 transition duration-300 rounded-full hadow bg-white text-[#44c5a6] peer-checked/emosi:bg-[#44c5a6] peer-checked/emosi:text-white"
+                >
+                  <EmosiIcon emosi={item.id} className="size-8" />
+                </label>
+                <label htmlFor={`emosi-${item.id}`}>
+                  <span className="capitalize text-sm w-[80%] text-center text-[#44c5a6]">
+                    {item.name}
+                  </span>
+                </label>
+              </div>
+            ))}
+
+            {/* Error */}
+            {state &&
+              typeof state === "object" &&
+              Array.isArray(state.cuaca) &&
+              state.cuaca.map((msg, idx) => (
+                <span
+                  key={"cuaca" + idx}
+                  className="text-sm text-red-500 mx-2 contents"
+                >
+                  Pilih cuaca
+                </span>
+              ))}
+          </div>
+        </div>
+
         <button
           type="submit"
           className={clsx(
-            "px-10 py-3 text-center w-full bg-cyan-400 rounded-sm cursor-pointer font-semibold text-gray-900 hover:bg-cyan-500",
+            "px-10 py-3 text-center w-full bg-[#15b790] rounded-sm cursor-pointer font-semibold text-gray-100 hover:bg-[#15b791d8]",
             {
               "opacity-50 cursor-progress": isPending,
             }

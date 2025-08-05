@@ -7,7 +7,8 @@ import clsx from "clsx";
 import { useState, useRef, useEffect } from "react";
 import MoodEditForm from "@/components/edit-mood";
 import { MoodProps } from "@/types/mood";
-import MoodIcon from "@/components/mood-icons";
+import { MoodIcon, EmosiIcon, CuacaIcon } from "@/components/mood-icons";
+import { emosiData, cuacaData } from "@/app/data";
 
 export default function MoodList() {
   useLoadMoods();
@@ -36,17 +37,6 @@ export default function MoodList() {
     const dateB = new Date(`${b.tanggal}T${b.jam.replace(".", ":")}`);
     return dateB.getTime() - dateA.getTime();
   });
-
-  const groupedByDate = sortedMoods.reduce<Record<string, typeof sortedMoods>>(
-    (acc, mood) => {
-      if (!acc[mood.tanggal]) {
-        acc[mood.tanggal] = [];
-      }
-      acc[mood.tanggal].push(mood);
-      return acc;
-    },
-    {}
-  );
 
   return (
     <div className=" md:px-8">
@@ -104,6 +94,7 @@ export default function MoodList() {
                       </div>
 
                       <div>
+                        {/* Mood */}
                         <span
                           className={clsx("text-2xl font-bold", {
                             "text-[#44c5a6]": item.mood === "1",
@@ -118,6 +109,44 @@ export default function MoodList() {
                         <span className="text-gray-700 text-sm mt-2 ml-2">
                           {item.jam}
                         </span>
+
+                        {/* Menampilkan cuaca */}
+                        <div className="flex flex-wrap items-center mt-2">
+                          {item.cuaca?.map((id: string) => {
+                            const label = cuacaData.find(
+                              (e) => String(e.id) === id
+                            );
+                            return (
+                              <div
+                                key={id}
+                                className="flex items-center gap-1 px-2 py-1 border border-gray-200 rounded-full bg-gray-50 text-sm text-gray-700 mr-2 mb-2"
+                              >
+                                <CuacaIcon cuaca={id} className="size-4" />
+                                <span>{label?.name}</span>
+                              </div>
+                            );
+                          })}
+                        </div>
+
+                        {/* Menampilkan emosi */}
+                        <div className="flex flex-wrap items-center">
+                          {item.emosi?.map((id: string) => {
+                            const label = emosiData.find(
+                              (e) => String(e.id) === id
+                            );
+                            return (
+                              <div
+                                key={id}
+                                className="flex items-center gap-1 px-2 py-1 border border-gray-200 rounded-full bg-gray-50 text-sm text-gray-700 mr-2 mb-2"
+                              >
+                                <EmosiIcon emosi={id} className="size-4" />
+                                <span>{label?.name}</span>
+                              </div>
+                            );
+                          })}
+                        </div>
+
+                        {/* Catatan */}
                         <div className="">
                           <p className="text-sm text-gray-600 mt-2 hidden md:block">
                             {shortNote}{" "}
@@ -130,7 +159,10 @@ export default function MoodList() {
                               </button>
                             )}
                           </p>
-                          <p className="text-sm text-gray-600 mt-2 block md:hidden">{item.catatan}</p>
+
+                          <p className="text-sm text-gray-600 mt-2 block md:hidden">
+                            {item.catatan}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -188,7 +220,7 @@ export default function MoodList() {
           onClick={() => setEditingId(null)}
         >
           <div
-            className="bg-white p-6 rounded-md w-full max-w-[90%] md:max-w-lg relative"
+            className="bg-white p-6 rounded-md w-full max-w-[90%] md:max-w-lg relative max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -198,7 +230,7 @@ export default function MoodList() {
               ✕
             </button>
             <h3 className="text-xl font-semibold mb-4">Edit Mood</h3>
-            <MoodEditForm id={editingId} />
+            <MoodEditForm id={editingId} onSuccess={() => setEditingId(null)} />
           </div>
         </div>
       )}
@@ -240,13 +272,47 @@ export default function MoodList() {
                   "text-[#f5586b]": detailMood.mood === "5",
                 })}
               >
-                <MoodIcon mood={detailMood.mood} className={"size-10"} />{" "}
+                <MoodIcon mood={detailMood.mood} className={"size-10 mr-3"} />{" "}
                 {getMoodLabel(detailMood.mood)}
               </span>{" "}
               <span className="text-gray-700 text-sm mb-1">
                 {detailMood.jam}
               </span>
             </div>
+
+            {/* Menampilkan cuaca */}
+            <div className="flex flex-wrap items-center mt-2 px-6">
+              {detailMood.cuaca?.map((id: string) => {
+                const label = cuacaData.find((e) => String(e.id) === id);
+                return (
+                  <div
+                    key={id}
+                    className="flex items-center gap-1 px-2 py-1 border border-gray-200 rounded-full bg-gray-50 text-sm text-gray-700 mr-2 mb-2"
+                  >
+                    <CuacaIcon cuaca={id} className="size-4" />
+                    <span>{label?.name}</span>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Menampilkan emosi */}
+            <div className="flex flex-wrap items-center px-6">
+              {detailMood.emosi?.map((id: string) => {
+                const label = emosiData.find((e) => String(e.id) === id);
+                return (
+                  <div
+                    key={id}
+                    className="flex items-center gap-1 px-2 py-1 border border-gray-200 rounded-full bg-gray-50 text-sm text-gray-700 mr-2 mb-2"
+                  >
+                    <EmosiIcon emosi={id} className="size-4" />
+                    <span>{label?.name}</span>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Catatan */}
             <p className="text-sm text-gray-600 mt-4 px-6">
               <strong>Catatan:</strong> {detailMood.catatan}
             </p>

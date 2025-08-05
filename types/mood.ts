@@ -4,5 +4,6 @@ export interface MoodProps {
   tanggal: string;
   catatan?: string;
   mood: string;
-  // mood: string[];
+  cuaca?: string[];
+  emosi?: string[];
 }

@@ -1,14 +1,72 @@
 "use client";
 
 import {
-  MdSentimentVeryDissatisfied,
-  MdSentimentDissatisfied,
+  MdSentimentSatisfiedAlt,
   MdSentimentNeutral,
+  MdSentimentDissatisfied,
+  MdSentimentVeryDissatisfied,
+  MdEmojiEmotions,
+  MdBatteryAlert,
+  MdHelpOutline,
+  MdOutlineSentimentDissatisfied,
   MdSentimentSatisfied,
   MdSentimentVerySatisfied,
 } from "react-icons/md";
+import {
+  WiDaySunny,
+  WiCloudy,
+  WiRain,
+  WiSnowflakeCold,
+  WiHot,
+  WiThunderstorm,
+  WiStrongWind,
+} from "react-icons/wi";
+import { FaBolt, FaPrayingHands, FaSadTear } from "react-icons/fa";
+import { BiBrain } from "react-icons/bi";
+import { LuCoffee } from "react-icons/lu";
 
-export default function MoodIcon({
+export function EmosiIcon({
+  emosi,
+  className = "",
+}: {
+  emosi: string | number;
+  className?: string;
+}) {
+  const emosiStr = String(emosi);
+
+  switch (emosiStr) {
+    case "1":
+      return <MdSentimentSatisfiedAlt className={className} />;
+    case "2":
+      return <FaBolt className={className} />;
+    case "3":
+      return <FaPrayingHands className={className} />;
+    case "4":
+      return <LuCoffee className={className} />;
+    case "5":
+      return <MdEmojiEmotions className={className} />;
+    case "6":
+      return <MdBatteryAlert className={className} />;
+    case "7":
+      return <MdHelpOutline className={className} />;
+    case "8":
+      return <MdSentimentNeutral className={className} />;
+    case "9":
+      return <MdOutlineSentimentDissatisfied className={className} />;
+    case "10":
+      return <MdSentimentVeryDissatisfied className={className} />;
+    case "11":
+      return <BiBrain className={className} />;
+    case "12":
+      return <MdSentimentDissatisfied className={className} />;
+    case "13":
+      return <FaSadTear className={className} />;
+    default:
+      return null;
+  }
+}
+
+export function MoodIcon({
   mood,
   className,
 }: {
@@ -28,6 +86,35 @@ export default function MoodIcon({
       return <MdSentimentSatisfied className={className} />;
     case "1":
       return <MdSentimentVerySatisfied className={className} />;
+    default:
+      return null;
+  }
+}
+
+export function CuacaIcon({
+  cuaca,
+  className,
+}: {
+  cuaca: string | number;
+  className?: string;
+}) {
+  const cuacaStr = String(cuaca);
+
+  switch (cuacaStr) {
+    case "1":
+      return <WiDaySunny className={className} />; // Cerah
+    case "2":
+      return <WiCloudy className={className} />; // Berawan
+    case "3":
+      return <WiRain className={className} />; // Hujan
+    case "4":
+      return <WiSnowflakeCold className={className} />; // Dingin
+    case "5":
+      return <WiHot className={className} />; // Panas
+    case "6":
+      return <WiThunderstorm className={className} />; // Badai
+    case "7":
+      return <WiStrongWind className={className} />; // Berangin
     default:
       return null;
   }

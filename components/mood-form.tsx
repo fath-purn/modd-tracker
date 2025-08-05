@@ -4,8 +4,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useMoodStore } from "@/lib/action";
 import clsx from "clsx";
-import { moodData } from "@/app/data";
-import MoodIcon from "./mood-icons";
+import { moodData, cuacaData, emosiData } from "@/app/data";
+import { MoodIcon, CuacaIcon, EmosiIcon } from "@/components/mood-icons";
 
 export default function MoodForm() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
@@ -34,6 +34,7 @@ export default function MoodForm() {
       <form action={formAction}>
         <div className="grid md:grid-cols-2 md:gap-4 mb-4">
           <div className="mb-4 md:mb-0">
+            {/* Tanggal */}
             <label className="block mb-2 text-sm font-medium text-gray-900">
               Tanggal
             </label>
@@ -55,6 +56,8 @@ export default function MoodForm() {
               wrapperClassName="w-full"
             />
           </div>
+
+          {/* Jam */}
           <div>
             <label className="block mb-2 text-sm font-medium text-gray-900">
               Jam
@@ -81,6 +84,8 @@ export default function MoodForm() {
             />
           </div>
         </div>
+
+        {/* Catatan */}
         <div className="mb-4">
           <label className="block mb-2 text-sm font-medium text-gray-900">
             Catatan
@@ -100,6 +105,8 @@ export default function MoodForm() {
               </span>
             ))}
         </div>
+
+        {/* Mood */}
         <div className="mb-4">
           <label className="block mb-2 text-sm font-medium text-gray-900">
             Mood
@@ -112,23 +119,23 @@ export default function MoodForm() {
                   name="mood"
                   id={`mood-${item.id}`}
                   value={item.id}
-                  className="sr-only peer"
+                  className="sr-only peer/mood"
                 />
 
                 <label
                   htmlFor={`mood-${item.id}`}
                   className={clsx(
-                    "cursor-pointer flex flex-col items-center justify-center gap-1 border rounded-lg px-2 py-1 transition peer-checked:ring-2 peer-checked:ring-offset-2 ",
+                    "cursor-pointer flex flex-col items-center justify-center gap-1 border rounded-lg px-2 py-1 transition peer-checked/mood:ring-2 peer-checked/mood:ring-offset-2 ",
                     {
-                      "text-[#44c5a6] peer-checked:ring-[#44c5a6]":
+                      "text-[#44c5a6] peer-checked/mood:ring-[#44c5a6]":
                         item.id === 1,
-                      "text-[#a4d756] peer-checked:ring-[#a4d756]":
+                      "text-[#a4d756] peer-checked/mood:ring-[#a4d756]":
                         item.id === 2,
-                      "text-[#71b5dc] peer-checked:ring-[#71b5dc]":
+                      "text-[#71b5dc] peer-checked/mood:ring-[#71b5dc]":
                         item.id === 3,
-                      "text-[#f9a44a] peer-checked:ring-[#f9a44a]":
+                      "text-[#f9a44a] peer-checked/mood:ring-[#f9a44a]":
                         item.id === 4,
-                      "text-[#f5586b] peer-checked:ring-[#f5586b]":
+                      "text-[#f5586b] peer-checked/mood:ring-[#f5586b]":
                         item.id === 5,
                     }
                   )}
@@ -140,16 +147,113 @@ export default function MoodForm() {
                 </label>
               </div>
             ))}
+
+            {/* Error */}
             {state &&
               typeof state === "object" &&
               Array.isArray(state.mood) &&
               state.mood.map((msg, idx) => (
-                <span key={"mood" + idx} className="text-sm text-red-500 mx-2 contents">
+                <span
+                  key={"mood" + idx}
+                  className="text-sm text-red-500 mx-2 contents"
+                >
                   Pilih mood
                 </span>
               ))}
           </div>
         </div>
+
+        {/* Cuaca */}
+        <div className="mb-4">
+          <label className="block mb-2 text-sm font-medium text-gray-900">
+            Cuaca
+          </label>
+          <div className="grid grid-cols-4 justify-between md:grid-cols-7 md:gap-3 md:w-[70%] mx-auto">
+            {cuacaData.map((item) => (
+              <div key={item.id} className="flex flex-col items-center mb-4">
+                <input
+                  type="checkbox"
+                  name="cuaca"
+                  id={`cuaca-${item.id}`}
+                  value={item.id}
+                  className="sr-only peer/cuaca"
+                />
+
+                <label
+                  htmlFor={`cuaca-${item.id}`}
+                  className="cursor-pointer flex justify-center p-3 md:text-3xl border border-gray-300 transition duration-300 rounded-full hadow bg-white text-[#44c5a6] peer-checked/cuaca:bg-[#44c5a6] peer-checked/cuaca:text-white"
+                >
+                  <CuacaIcon cuaca={item.id} className="size-8" />
+                </label>
+                <label htmlFor={`cuaca-${item.id}`}>
+                  <span className="capitalize text-sm w-[80%] text-center text-[#44c5a6]">
+                    {item.name}
+                  </span>
+                </label>
+              </div>
+            ))}
+
+            {/* Error */}
+            {state &&
+              typeof state === "object" &&
+              Array.isArray(state.cuaca) &&
+              state.cuaca.map((msg, idx) => (
+                <span
+                  key={"cuaca" + idx}
+                  className="text-sm text-red-500 mx-2 contents"
+                >
+                  Pilih cuaca
+                </span>
+              ))}
+          </div>
+        </div>
+
+        {/* Emosi */}
+        <div className="mb-4">
+          <label className="block mb-2 text-sm font-medium text-gray-900">
+            Emosi
+          </label>
+          <div className="grid grid-cols-4 justify-between md:grid-cols-7 md:gap-3 md:w-[70%] mx-auto">
+            {emosiData.map((item) => (
+              <div key={item.id} className="flex flex-col items-center mb-4">
+                <input
+                  type="checkbox"
+                  name="emosi"
+                  id={`emosi-${item.id}`}
+                  value={item.id}
+                  className="sr-only peer/emosi"
+                />
+
+                <label
+                  htmlFor={`emosi-${item.id}`}
+                  className="cursor-pointer flex justify-center p-3 md:text-3xl border border-gray-300 transition duration-300 rounded-full hadow bg-white text-[#44c5a6] peer-checked/emosi:bg-[#44c5a6] peer-checked/emosi:text-white"
+                >
+                  <EmosiIcon emosi={item.id} className="size-8" />
+                </label>
+                <label htmlFor={`emosi-${item.id}`}>
+                  <span className="capitalize text-sm w-[80%] text-center text-[#44c5a6]">
+                    {item.name}
+                  </span>
+                </label>
+              </div>
+            ))}
+
+            {/* Error */}
+            {state &&
+              typeof state === "object" &&
+              Array.isArray(state.cuaca) &&
+              state.cuaca.map((msg, idx) => (
+                <span
+                  key={"cuaca" + idx}
+                  className="text-sm text-red-500 mx-2 contents"
+                >
+                  Pilih cuaca
+                </span>
+              ))}
+          </div>
+        </div>
+
+        {/* Tombol Simpan */}
         <button
           type="submit"
           className={clsx(

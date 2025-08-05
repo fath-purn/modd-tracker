@@ -23,11 +23,11 @@ ChartJS.register(
 );
 
 const moodValueMap: Record<string | number, number> = {
-  "1": 1, // Sangat buruk
+  "1": 1,
   "2": 2,
   "3": 3,
   "4": 4,
-  "5": 5, // Keren
+  "5": 5,
 };
 
 const moodLabelMap: Record<number, string> = {
@@ -46,7 +46,7 @@ export default function MoodChart({ moods }: { moods: MoodProps[] }) {
   const labels = sorted.map((item) =>
     new Date(item.tanggal).toLocaleDateString("id-ID", {
       day: "2-digit",
-      month: "short", 
+      month: "short",
     })
   );
 

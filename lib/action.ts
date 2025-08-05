@@ -13,7 +13,8 @@ export const useMoodStore = create<MoodZustand>((set, get) => ({
     const rawData = {
       catatan: formData.get("catatan"),
       mood: formData.get("mood"),
-      // mood: formData.getAll("mood"),
+      emosi: formData.getAll("emosi"),
+      cuaca: formData.getAll("cuaca"),
     };
 
     const validateFields = moodSchema.safeParse(rawData);
@@ -51,6 +52,8 @@ export const useMoodStore = create<MoodZustand>((set, get) => ({
     const rawData = {
       catatan: formData.get("catatan"),
       mood: formData.get("mood"),
+      emosi: formData.getAll("emosi"),
+      cuaca: formData.getAll("cuaca"),
     };
 
     const validateFields = moodSchema.safeParse(rawData);

@@ -26,33 +26,35 @@ export default function MoodHeatmap({ moods }: { moods: MoodProps[] }) {
 
   return (
     <div className="mt-5">
-      <h2 className="text-lg font-semibold mb-4">Heatmap Mood Harian</h2>
-      <CalendarHeatmap
-        startDate={startDate}
-        endDate={today}
-        values={values}
-        classForValue={(value: MoodHeatmapProps) => {
-          if (!value || !value.count) return "color-empty";
-          return `color-${value.count}`;
-        }}
-        showWeekdayLabels={true}
-        weekdayLabels={["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"]}
-        tooltipDataAttrs={(value: any) => {
-          if (!value || !value.date) return null;
-          return {
-            "data-tip": `${format(
-              new Date(value.date),
-              "dd MMM yyyy"
-            )} - Mood: ${value.count}`,
-          };
-        }}
-      />
-      <div className="flex items-center gap-4 mt-4 flex-wrap text-sm">
-        <LegendBox className="bg-[#44c5a6]" label="Keren" />
-        <LegendBox className="bg-[#a4d756]" label="Baik" />
-        <LegendBox className="bg-[#71b5dc]" label="Biasa" />
-        <LegendBox className="bg-[#f9a44a]" label="Buruk" />
-        <LegendBox className="bg-[#f5586b]" label="Parah" />
+      <h2 className="text-lg font-semibold mb-4">Mood Harian</h2>
+      <div className="flex justify-between gap-6 md:w-2/3 mx-auto">
+        <CalendarHeatmap
+          startDate={startDate}
+          endDate={today}
+          values={values}
+          classForValue={(value: MoodHeatmapProps) => {
+            if (!value || !value.count) return "color-empty";
+            return `color-${value.count}`;
+          }}
+          showWeekdayLabels={true}
+          weekdayLabels={["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"]}
+          tooltipDataAttrs={(value: MoodHeatmapProps) => {
+            if (!value || !value.tanggal) return null;
+            return {
+              "data-tip": `${format(
+                new Date(value.tanggal),
+                "dd MMM yyyy"
+              )} - Mood: ${value.count}`,
+            };
+          }}
+        />
+        <div className="text-sm">
+          <LegendBox className="bg-[#44c5a6]" label="Keren" />
+          <LegendBox className="bg-[#a4d756]" label="Baik" />
+          <LegendBox className="bg-[#71b5dc]" label="Biasa" />
+          <LegendBox className="bg-[#f9a44a]" label="Buruk" />
+          <LegendBox className="bg-[#f5586b]" label="Parah" />
+        </div>
       </div>
     </div>
   );
