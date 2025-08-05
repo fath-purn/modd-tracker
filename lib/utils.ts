@@ -37,3 +37,4 @@ export const getMoodLabel = (moodId: number | string) => {
   const found = moodData.find((item) => String(item.id) === String(moodId));
   return found ? found.name : "-";
 };
+

@@ -6,12 +6,12 @@ import Link from "next/link";
 export default function NavLink() {
   return (
     <>
-      <div className="bg-gray-900 text-gray-200 px-10 rounded-full">
-        <ul className="flex flex-col font-semibold rounded-sm text-sm uppercase md:flex-row md:items-center space-x-10">
-          <li>
+    <div className="bg-[#15b790] md:px-10 md:rounded-full">
+        <ul className="flex flex-row items-center uppercase gap-8 font-semibold">
+          <li className="flex rounded-sm text-sm md:flex-row md:items-center space-x-10 md:rounded-full">
             <Link
               href="/"
-              className="block py-2 px-3 text-gray-200 hover:bg-gray-800 rounded-sm md:hover:bg-transparent md:p-0"
+              className="px-3  py-1"
             >
               Entri
             </Link>
@@ -19,21 +19,21 @@ export default function NavLink() {
           <li>
             <Link
               href="/mood/add"
-              className="block py-2 px-3 relative bottom-5 rounded-full text-gray-200 border-2 hover:scale-110 border-gray-800 hover:bg-gray-800 transition duration-300 md:hover:bg-transparent md:p-0"
+              className="block relative bottom-4 rounded-full hover:scale-110 border border-gray-100 hover:bg-gray-800 transition duration-300"
             >
-              <IoAddOutline className="size-13 bg-gray-900 border-2 border-gray-200 shadow rounded-full" />
+              <IoAddOutline className="size-15 bg-white text-[#15b790] rounded-full border-4 border-[#15b790] shadow-lg" />
             </Link>
           </li>
           <li>
             <Link
               href="/statistik"
-              className="block py-2 px-3 text-gray-200 hover:bg-gray-800 rounded-sm md:hover:bg-transparent md:p-0"
+              className="px-3  "
             >
               Statistik
             </Link>
           </li>
         </ul>
-      </div>
+        </div>
     </>
   );
 }

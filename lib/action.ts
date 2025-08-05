@@ -7,7 +7,8 @@ import { redirect } from "next/navigation";
 export const useMoodStore = create<MoodZustand>((set, get) => ({
   moods: [],
   error: null,
-  setMoods: (moods: MoodProps[]) => set({ moods }),
+  isHydrated: false,
+  setMoods: (moods: MoodProps[]) => set({ moods, isHydrated: true }),
   saveRoom: (jam, tanggal, formData) => {
     const rawData = {
       catatan: formData.get("catatan"),

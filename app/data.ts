@@ -21,7 +21,7 @@ export const moodData = [
   },
   {
     id: 5,
-    name: "Sangat Buruk",
+    name: "Parah",
   },
 ];
 
@@ -32,7 +32,14 @@ export const useLoadMoods = () => {
     if (typeof window !== "undefined") {
       const stored = localStorage.getItem("moods");
       if (stored) {
-        setMoods(JSON.parse(stored));
+        try {
+          const parsed = JSON.parse(stored);
+          setMoods(parsed);
+        } catch (e) {
+          console.error("Gagal parse moods:", e);
+        }
+      } else {
+        setMoods([]);
       }
     }
   }, [setMoods]);

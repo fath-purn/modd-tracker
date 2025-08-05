@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useMoodStore } from "@/lib/action";
 import clsx from "clsx";
 import { moodData } from "@/app/data";
+import MoodIcon from "./mood-icons";
 
 export default function MoodForm() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
@@ -29,7 +30,7 @@ export default function MoodForm() {
   );
 
   return (
-    <div>
+    <div className="transition opacity-0 animate-[fadeSlideIn_0.5s_forwards]">
       <form action={formAction}>
         <div className="grid md:grid-cols-2 md:gap-4 mb-4">
           <div className="mb-4 md:mb-0">
@@ -103,7 +104,7 @@ export default function MoodForm() {
           <label className="block mb-2 text-sm font-medium text-gray-900">
             Mood
           </label>
-          <div className="grid md:grid-cols-5">
+          <div className="grid grid-cols-5 justify-between md:w-[50%] md:mx-auto">
             {moodData.map((item) => (
               <div key={item.id} className="flex items-center mb-4">
                 <input
@@ -111,13 +112,31 @@ export default function MoodForm() {
                   name="mood"
                   id={`mood-${item.id}`}
                   value={item.id}
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border border-gray-400"
+                  className="sr-only peer"
                 />
+
                 <label
-                  className="ms-2 text-sm font-medium text-gray-900 capitalize"
                   htmlFor={`mood-${item.id}`}
+                  className={clsx(
+                    "cursor-pointer flex flex-col items-center justify-center gap-1 border rounded-lg px-2 py-1 transition peer-checked:ring-2 peer-checked:ring-offset-2 ",
+                    {
+                      "text-[#44c5a6] peer-checked:ring-[#44c5a6]":
+                        item.id === 1,
+                      "text-[#a4d756] peer-checked:ring-[#a4d756]":
+                        item.id === 2,
+                      "text-[#71b5dc] peer-checked:ring-[#71b5dc]":
+                        item.id === 3,
+                      "text-[#f9a44a] peer-checked:ring-[#f9a44a]":
+                        item.id === 4,
+                      "text-[#f5586b] peer-checked:ring-[#f5586b]":
+                        item.id === 5,
+                    }
+                  )}
                 >
-                  {item.name}
+                  <MoodIcon mood={item.id} className="size-10 md:text-3xl" />
+                  <span className="capitalize text-sm w-[80%] text-center">
+                    {item.name}
+                  </span>
                 </label>
               </div>
             ))}
@@ -125,8 +144,8 @@ export default function MoodForm() {
               typeof state === "object" &&
               Array.isArray(state.mood) &&
               state.mood.map((msg, idx) => (
-                <span key={"mood" + idx} className="text-sm text-red-500 mx-2">
-                  {msg}
+                <span key={"mood" + idx} className="text-sm text-red-500 mx-2 contents">
+                  Pilih mood
                 </span>
               ))}
           </div>
@@ -134,7 +153,7 @@ export default function MoodForm() {
         <button
           type="submit"
           className={clsx(
-            "px-10 py-3 text-center w-full bg-cyan-400 rounded-sm cursor-pointer font-semibold text-gray-900 hover:bg-cyan-500",
+            "px-10 py-3 text-center w-full bg-[#15b790] rounded-sm cursor-pointer font-semibold text-gray-100 hover:bg-[#15b791d8]",
             {
               "opacity-50 cursor-progress": isPending,
             }

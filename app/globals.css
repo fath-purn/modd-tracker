@@ -39,3 +39,30 @@ body {
 .animate-fade-in {
   animation: fadeIn 0.2s ease-out forwards;
 }
+
+@keyframes fadeSlideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.react-calendar-heatmap .color-empty {
+  fill: #e5e7eb;
+}
+
+.react-calendar-heatmap .color-5 {
+  fill: #f5586b;
+}
+.react-calendar-heatmap .color-4 {
+  fill: #f9a44a;
+}
+.react-calendar-heatmap .color-3 {
+  fill: #71b5dc;
+}
+.react-calendar-heatmap .color-2 {
+  fill: #a4d756;
+}
+.react-calendar-heatmap .color-1 {
+  fill: #44c5a6;
+}

@@ -3,6 +3,7 @@ import { MoodProps } from "@/types/mood";
 export interface MoodZustand {
   moods: MoodProps[];
   error: string | Record<string, string[]> | null;
+  isHydrated: boolean;
   setMoods: (moods: MoodProps[]) => void;
   saveRoom: (
     jam: string,
