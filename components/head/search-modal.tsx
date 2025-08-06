@@ -36,7 +36,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
     >
       <div
         ref={modalRef}
-        className="bg-white w-full flex flex-col justify-between max-w-md p-6 rounded-lg shadow-xl h-full md:h-fit"
+        className="bg-white w-full flex flex-col justify-between max-w-md p-6 rounded-lg shadow-xl h-full overflow-y-auto md:h-fit"
         onClick={(e) => e.stopPropagation()}
       >
         <div>
