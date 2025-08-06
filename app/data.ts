@@ -1,6 +1,9 @@
 "use client";
 import { useMoodStore } from "@/lib/action";
 import { useEffect } from "react";
+import { format } from "date-fns";
+import { id } from "date-fns/locale";
+import { MoodProps } from "@/types/mood";
 
 export const moodData = [
   {
@@ -129,4 +132,29 @@ export const useLoadMoods = () => {
       }
     }
   }, [setMoods]);
+};
+
+export const useMonthLabelOptions = () => {
+  const moods: MoodProps[] = useMoodStore((s) => s.moods);
+
+  const availableMonths = Array.from(
+    new Set(
+      moods.map((item) => {
+        const d = new Date(item.tanggal);
+        return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+      })
+    )
+  ).sort();
+
+  const monthOptions = availableMonths.map((val) => {
+    const [year, month] = val.split("-");
+    const date = new Date(Number(year), Number(month) - 1);
+    return {
+      key: val,
+      label: format(date, "MMMM yyyy", { locale: id }),
+      date,
+    };
+  });
+
+  return monthOptions;
 };

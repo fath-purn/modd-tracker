@@ -6,12 +6,19 @@ export const metadata: Metadata = {
   title: "Tambah",
 };
 
-export default function MoodCreate() {
+
+export default function MoodCreate({
+  searchParams,
+}: {
+  searchParams?: { moodId?: string };
+}) {
+  // const moodId = searchParams?.moodId ?? "";
+
   return (
     <div className="min-h-screen bg-slate-50 text-gray-900">
       <div className="max-w-screen-lg mx-auto pt-20 pb-25 px-4">
         <h1 className="text-center text-4xl mb-8">
-          Bagaimana kabarmu sekarang?
+          Bagaimana kabarmu sekarang? 
         </h1>
         <Suspense fallback={<p>loading...</p>}>
           <MoodForm />

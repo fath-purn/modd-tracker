@@ -1,13 +1,14 @@
 import MoodList from "@/components/mood-list";
+import MoodHead from "@/components/mood-head";
 import { Suspense } from "react";
 
 export default function Mood() {
   return (
-    <div className="min-h-screen bg-slate-50 text-gray-900">
-      <div className="max-w-screen-lg mx-auto py-20 px-4">
-        <h1 className="text-center text-4xl mb-8">
-          Bagaimana kabarmu sekarang?
-        </h1>
+    <div className="min-h-screen bg-slate-100 text-gray-900">
+      <div className="max-w-screen-lg mx-auto pt-14 pb-20 px-4">
+        <Suspense fallback={<p>loading...</p>}>
+          <MoodHead />
+        </Suspense>
         <Suspense fallback={<p>loading...</p>}>
           <MoodList />
         </Suspense>

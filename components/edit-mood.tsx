@@ -108,33 +108,15 @@ export default function MoodEditForm({
             />
           </div>
         </div>
-        <div className="mb-4">
-          <label className="block mb-2 text-sm font-medium text-gray-900">
-            Catatan
-          </label>
-          <textarea
-            name="catatan"
-            placeholder="Catatan..."
-            className="py-2 px-2 rounded-md border border-gray-300 w-full"
-            rows={4}
-            defaultValue={mood?.catatan}
-          ></textarea>
-          {state &&
-            typeof state === "object" &&
-            Array.isArray(state.catatan) &&
-            state.catatan.map((msg, idx) => (
-              <span key={"catatan" + idx} className="text-sm text-red-500 mx-2">
-                {msg}
-              </span>
-            ))}
-        </div>
+
+        {/* Mood */}
         <div className="mb-4">
           <label className="block mb-2 text-sm font-medium text-gray-900">
             Mood
           </label>
-          <div className="grid grid-cols-5">
+          <div className="grid grid-cols-5 gap-3">
             {moodData.map((item) => (
-              <div key={item.id} className="flex items-center mb-4">
+              <div key={item.id} className="flex flex-col items-center mb-4">
                 <input
                   type="radio"
                   name="mood"
@@ -147,23 +129,36 @@ export default function MoodEditForm({
                 <label
                   htmlFor={`mood-${item.id}`}
                   className={clsx(
-                    "cursor-pointer flex flex-col items-center justify-center gap-1 border rounded-lg px-2 py-1 transition peer-checked/mood:ring-2 peer-checked/mood:ring-offset-2 ",
+                    "cursor-pointer flex justify-center p-3 md:text-3xl border border-gray-300 transition duration-300 rounded-full hadow bg-white peer-checked/mood:text-white",
                     {
-                      "text-[#44c5a6] peer-checked/mood:ring-[#44c5a6]":
+                      "text-[#44c5a6] peer-checked/mood:bg-[#44c5a6]":
                         item.id === 1,
-                      "text-[#a4d756] peer-checked/mood:ring-[#a4d756]":
+                      "text-[#a4d756] peer-checked/mood:bg-[#a4d756]":
                         item.id === 2,
-                      "text-[#71b5dc] peer-checked/mood:ring-[#71b5dc]":
+                      "text-[#71b5dc] peer-checked/mood:bg-[#71b5dc]":
                         item.id === 3,
-                      "text-[#f9a44a] peer-checked/mood:ring-[#f9a44a]":
+                      "text-[#f9a44a] peer-checked/mood:bg-[#f9a44a]":
                         item.id === 4,
-                      "text-[#f5586b] peer-checked/mood:ring-[#f5586b]":
+                      "text-[#f5586b] peer-checked/mood:bg-[#f5586b]":
                         item.id === 5,
                     }
                   )}
                 >
-                  <MoodIcon mood={item.id} className="size-10 md:text-3xl" />
-                  <span className="capitalize text-sm w-[80%] text-center">
+                  <MoodIcon mood={item.id} className="size-8" />
+                </label>
+                <label htmlFor={`cuaca-${item.id}`}>
+                  <span
+                    className={clsx(
+                      "capitalize text-sm w-[80%] text-center text-[#44c5a6]",
+                      {
+                        "text-[#44c5a6]": item.id === 1,
+                        "text-[#a4d756]": item.id === 2,
+                        "text-[#71b5dc]": item.id === 3,
+                        "text-[#f9a44a]": item.id === 4,
+                        "text-[#f5586b]": item.id === 5,
+                      }
+                    )}
+                  >
                     {item.name}
                   </span>
                 </label>
@@ -270,6 +265,28 @@ export default function MoodEditForm({
                 </span>
               ))}
           </div>
+        </div>
+
+        {/* Catatan */}
+        <div className="mb-4">
+          <label className="block mb-2 text-sm font-medium text-gray-900">
+            Catatan
+          </label>
+          <textarea
+            name="catatan"
+            placeholder="Catatan..."
+            className="py-2 px-2 rounded-md border border-gray-300 w-full"
+            rows={4}
+            defaultValue={mood?.catatan}
+          ></textarea>
+          {state &&
+            typeof state === "object" &&
+            Array.isArray(state.catatan) &&
+            state.catatan.map((msg, idx) => (
+              <span key={"catatan" + idx} className="text-sm text-red-500 mx-2">
+                {msg}
+              </span>
+            ))}
         </div>
 
         <button

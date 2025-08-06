@@ -1,5 +1,8 @@
 import { create } from "zustand";
-import { MoodZustand } from "@/types/zustand";
+import {
+  MoodZustand,
+  SearchFilterState,
+} from "@/types/zustand";
 import { moodSchema } from "@/lib/zod";
 import { MoodProps } from "@/types/mood";
 import { redirect } from "next/navigation";
@@ -39,6 +42,8 @@ export const useMoodStore = create<MoodZustand>((set, get) => ({
       localStorage.setItem("moods", JSON.stringify(updatedMoods));
     }
 
+    useSearchFilterStore.getState().clearFilters();
+
     redirect("/");
   },
   deleteMood: (id: string) => {
@@ -74,4 +79,40 @@ export const useMoodStore = create<MoodZustand>((set, get) => ({
 
     return {};
   },
+}));
+
+export const useSearchFilterStore = create<SearchFilterState>((set, get) => ({
+  query: "",
+  selectedCuaca: [],
+  selectedEmosi: [],
+  selectedMonth: new Date(),
+
+  setQuery: (q) => set({ query: q }),
+
+  toggleCuaca: (id) => {
+    const current = get().selectedCuaca;
+    set({
+      selectedCuaca: current.includes(id)
+        ? current.filter((c) => c !== id)
+        : [...current, id],
+    });
+  },
+
+  toggleEmosi: (id) => {
+    const current = get().selectedEmosi;
+    set({
+      selectedEmosi: current.includes(id)
+        ? current.filter((e) => e !== id)
+        : [...current, id],
+    });
+  },
+
+  setSelectedMonth: (date: Date) => set({ selectedMonth: date }),
+
+  clearFilters: () =>
+    set({
+      query: "",
+      selectedCuaca: [],
+      selectedEmosi: [],
+    }),
 }));

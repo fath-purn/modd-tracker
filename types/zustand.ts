@@ -18,3 +18,16 @@ export interface MoodZustand {
     formData: FormData
   ) => { error?: string | Record<string, string[]> };
 }
+
+export interface SearchFilterState {
+  query: string;
+  selectedCuaca: string[];
+  selectedEmosi: string[];
+  selectedMonth: Date;
+
+  setQuery: (q: string) => void;
+  toggleCuaca: (id: string) => void;
+  toggleEmosi: (id: string) => void;
+  setSelectedMonth: (date: Date) => void;
+  clearFilters: () => void;
+}

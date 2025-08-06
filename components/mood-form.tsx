@@ -2,16 +2,21 @@
 import { useState, useActionState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useMoodStore } from "@/lib/action";
+import { useMoodStore, useSearchFilterStore } from "@/lib/action";
 import clsx from "clsx";
 import { moodData, cuacaData, emosiData } from "@/app/data";
 import { MoodIcon, CuacaIcon, EmosiIcon } from "@/components/mood-icons";
+import { useSearchParams } from "next/navigation";
 
 export default function MoodForm() {
+  const searchParams = useSearchParams();
+  const moodId = searchParams.get("moodId");
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [selectedTime, setSelectedTime] = useState<Date | null>(new Date());
   const saveRoom = useMoodStore((state) => state.saveRoom);
+  const resetFilter = useSearchFilterStore((s)=> s.clearFilters)
 
+  // save data
   const [state, formAction, isPending] = useActionState(
     async (_prevState: unknown, formData: FormData) => {
       const tanggal = selectedDate
@@ -85,79 +90,74 @@ export default function MoodForm() {
           </div>
         </div>
 
-        {/* Catatan */}
-        <div className="mb-4">
-          <label className="block mb-2 text-sm font-medium text-gray-900">
-            Catatan
-          </label>
-          <textarea
-            name="catatan"
-            placeholder="Catatan..."
-            className="py-2 px-2 rounded-md border border-gray-300 w-full"
-            rows={4}
-          ></textarea>
-          {state &&
-            typeof state === "object" &&
-            Array.isArray(state.catatan) &&
-            state.catatan.map((msg, idx) => (
-              <span key={"catatan" + idx} className="text-sm text-red-500 mx-2">
-                {msg}
-              </span>
-            ))}
-        </div>
-
         {/* Mood */}
         <div className="mb-4">
           <label className="block mb-2 text-sm font-medium text-gray-900">
             Mood
           </label>
-          <div className="grid grid-cols-5 justify-between md:w-[50%] md:mx-auto">
+          <div className="grid grid-cols-5 md:gap-3 md:w-[70%] mx-auto">
             {moodData.map((item) => (
-              <div key={item.id} className="flex items-center mb-4">
+              <div
+                key={item.id}
+                className="flex flex-col items-center mb-4 group"
+              >
                 <input
                   type="radio"
                   name="mood"
                   id={`mood-${item.id}`}
                   value={item.id}
-                  className="sr-only peer/mood"
+                  className="sr-only peer"
+                  defaultChecked={String(moodId) === String(item.id)}
                 />
 
+                {/* ICON */}
                 <label
                   htmlFor={`mood-${item.id}`}
                   className={clsx(
-                    "cursor-pointer flex flex-col items-center justify-center gap-1 border rounded-lg px-2 py-1 transition peer-checked/mood:ring-2 peer-checked/mood:ring-offset-2 ",
+                    "cursor-pointer flex justify-center p-3 md:text-3xl border border-gray-300 transition duration-300 rounded-full shadow bg-white",
                     {
-                      "text-[#44c5a6] peer-checked/mood:ring-[#44c5a6]":
+                      "text-[#44c5a6] hover:bg-[#44c5a6]/10 hover:text-[#44c5a6] peer-checked:bg-[#44c5a6] peer-checked:text-white":
                         item.id === 1,
-                      "text-[#a4d756] peer-checked/mood:ring-[#a4d756]":
+                      "text-[#a4d756] hover:bg-[#a4d756]/10 hover:text-[#a4d756] peer-checked:bg-[#a4d756] peer-checked:text-white":
                         item.id === 2,
-                      "text-[#71b5dc] peer-checked/mood:ring-[#71b5dc]":
+                      "text-[#71b5dc] hover:bg-[#71b5dc]/10 hover:text-[#71b5dc] peer-checked:bg-[#71b5dc] peer-checked:text-white":
                         item.id === 3,
-                      "text-[#f9a44a] peer-checked/mood:ring-[#f9a44a]":
+                      "text-[#f9a44a] hover:bg-[#f9a44a]/10 hover:text-[#f9a44a] peer-checked:bg-[#f9a44a] peer-checked:text-white":
                         item.id === 4,
-                      "text-[#f5586b] peer-checked/mood:ring-[#f5586b]":
+                      "text-[#f5586b] hover:bg-[#f5586b]/10 hover:text-[#f5586b] peer-checked:bg-[#f5586b] peer-checked:text-white":
                         item.id === 5,
                     }
                   )}
                 >
-                  <MoodIcon mood={item.id} className="size-10 md:text-3xl" />
-                  <span className="capitalize text-sm w-[80%] text-center">
+                  <MoodIcon mood={item.id} className="size-8" />
+                </label>
+
+                {/* TEKS */}
+                <label htmlFor={`mood-${item.id}`} className={clsx(
+                      "capitalize text-sm w-[80%] text-center transition duration-200 text-gray-600 mt-1",
+                      {
+                        "group-hover:text-[#44c5a6] peer-checked:text-[#44c5a6]":
+                          item.id === 1,
+                        "group-hover:text-[#a4d756] peer-checked:text-[#a4d756]":
+                          item.id === 2,
+                        "group-hover:text-[#71b5dc] peer-checked:text-[#71b5dc]":
+                          item.id === 3,
+                        "group-hover:text-[#f9a44a] peer-checked:text-[#f9a44a]":
+                          item.id === 4,
+                        "group-hover:text-[#f5586b] peer-checked:text-[#f5586b]":
+                          item.id === 5,
+                      }
+                    )}>
                     {item.name}
-                  </span>
                 </label>
               </div>
             ))}
-
-            {/* Error */}
             {state &&
               typeof state === "object" &&
               Array.isArray(state.mood) &&
               state.mood.map((msg, idx) => (
-                <span
-                  key={"mood" + idx}
-                  className="text-sm text-red-500 mx-2 contents"
-                >
-                  Pilih mood
+                <span key={"mood" + idx} className="text-sm text-red-500 mx-2">
+                  {msg}
                 </span>
               ))}
           </div>
@@ -176,12 +176,12 @@ export default function MoodForm() {
                   name="cuaca"
                   id={`cuaca-${item.id}`}
                   value={item.id}
-                  className="sr-only peer/cuaca"
+                  className="sr-only peer"
                 />
 
                 <label
                   htmlFor={`cuaca-${item.id}`}
-                  className="cursor-pointer flex justify-center p-3 md:text-3xl border border-gray-300 transition duration-300 rounded-full hadow bg-white text-[#44c5a6] peer-checked/cuaca:bg-[#44c5a6] peer-checked/cuaca:text-white"
+                  className="cursor-pointer flex justify-center p-3 md:text-3xl border border-gray-300 transition duration-300 rounded-full hadow bg-white text-[#44c5a6] peer-checked:bg-[#44c5a6] peer-checked:text-white"
                 >
                   <CuacaIcon cuaca={item.id} className="size-8" />
                 </label>
@@ -221,12 +221,12 @@ export default function MoodForm() {
                   name="emosi"
                   id={`emosi-${item.id}`}
                   value={item.id}
-                  className="sr-only peer/emosi"
+                  className="sr-only peer"
                 />
 
                 <label
                   htmlFor={`emosi-${item.id}`}
-                  className="cursor-pointer flex justify-center p-3 md:text-3xl border border-gray-300 transition duration-300 rounded-full hadow bg-white text-[#44c5a6] peer-checked/emosi:bg-[#44c5a6] peer-checked/emosi:text-white"
+                  className="cursor-pointer flex justify-center p-3 md:text-3xl border border-gray-300 transition duration-300 rounded-full hadow bg-white text-[#44c5a6] peer-checked:bg-[#44c5a6] peer-checked:text-white"
                 >
                   <EmosiIcon emosi={item.id} className="size-8" />
                 </label>
@@ -251,6 +251,27 @@ export default function MoodForm() {
                 </span>
               ))}
           </div>
+        </div>
+
+        {/* Catatan */}
+        <div className="mb-4">
+          <label className="block mb-2 text-sm font-medium text-gray-900">
+            Catatan
+          </label>
+          <textarea
+            name="catatan"
+            placeholder="Catatan..."
+            className="py-2 px-2 rounded-md border border-gray-300 w-full"
+            rows={4}
+          ></textarea>
+          {state &&
+            typeof state === "object" &&
+            Array.isArray(state.catatan) &&
+            state.catatan.map((msg, idx) => (
+              <span key={"catatan" + idx} className="text-sm text-red-500 mx-2">
+                {msg}
+              </span>
+            ))}
         </div>
 
         {/* Tombol Simpan */}
