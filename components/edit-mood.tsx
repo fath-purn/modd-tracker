@@ -4,7 +4,13 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useMoodStore } from "@/lib/action";
 import clsx from "clsx";
-import { moodData, emosiData, cuacaData } from "@/app/data";
+import {
+  moodData,
+  emosiData,
+  cuacaData,
+  moodClassesIcon,
+  moodClassesText,
+} from "@/app/data";
 import { MoodIcon, CuacaIcon, EmosiIcon } from "@/components/mood-icons";
 
 export default function MoodEditForm({
@@ -123,25 +129,14 @@ export default function MoodEditForm({
                   id={`mood-${item.id}`}
                   value={item.id}
                   defaultChecked={String(mood?.mood) === String(item.id)}
-                  className="sr-only peer/mood"
+                  className="sr-only peer"
                 />
 
                 <label
                   htmlFor={`mood-${item.id}`}
                   className={clsx(
                     "cursor-pointer flex justify-center p-3 md:text-3xl border border-gray-300 transition duration-300 rounded-full hadow bg-white peer-checked/mood:text-white",
-                    {
-                      "text-[#44c5a6] peer-checked/mood:bg-[#44c5a6]":
-                        item.id === 1,
-                      "text-[#a4d756] peer-checked/mood:bg-[#a4d756]":
-                        item.id === 2,
-                      "text-[#71b5dc] peer-checked/mood:bg-[#71b5dc]":
-                        item.id === 3,
-                      "text-[#f9a44a] peer-checked/mood:bg-[#f9a44a]":
-                        item.id === 4,
-                      "text-[#f5586b] peer-checked/mood:bg-[#f5586b]":
-                        item.id === 5,
-                    }
+                    moodClassesIcon[item.id]
                   )}
                 >
                   <MoodIcon mood={item.id} className="size-8" />
@@ -150,13 +145,7 @@ export default function MoodEditForm({
                   <span
                     className={clsx(
                       "capitalize text-sm w-[80%] text-center text-[#44c5a6]",
-                      {
-                        "text-[#44c5a6]": item.id === 1,
-                        "text-[#a4d756]": item.id === 2,
-                        "text-[#71b5dc]": item.id === 3,
-                        "text-[#f9a44a]": item.id === 4,
-                        "text-[#f5586b]": item.id === 5,
-                      }
+                      moodClassesText[item.id]
                     )}
                   >
                     {item.name}

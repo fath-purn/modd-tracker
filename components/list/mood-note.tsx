@@ -10,7 +10,7 @@ export function MoodNote({ note, isLongNote, onShowDetail }: MoodNoteProps) {
   return (
     <div>
       <p className="text-sm text-gray-600 mt-2 hidden md:block">
-        {note}{" "}
+        {note.slice(0, 100)}{" "}
         {isLongNote && (
           <button
             onClick={onShowDetail}
@@ -21,9 +21,7 @@ export function MoodNote({ note, isLongNote, onShowDetail }: MoodNoteProps) {
         )}
       </p>
 
-      <p className="text-sm text-gray-600 mt-2 block md:hidden">
-        {note}
-      </p>
+      <p className="text-sm text-gray-600 mt-2 block md:hidden">{note}</p>
     </div>
   );
 }

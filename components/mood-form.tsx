@@ -2,9 +2,15 @@
 import { useState, useActionState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useMoodStore, useSearchFilterStore } from "@/lib/action";
+import { useMoodStore } from "@/lib/action";
 import clsx from "clsx";
-import { moodData, cuacaData, emosiData } from "@/app/data";
+import {
+  moodData,
+  cuacaData,
+  emosiData,
+  moodClassesIcon,
+  moodClassesText,
+} from "@/app/data";
 import { MoodIcon, CuacaIcon, EmosiIcon } from "@/components/mood-icons";
 import { useSearchParams } from "next/navigation";
 
@@ -14,7 +20,6 @@ export default function MoodForm() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [selectedTime, setSelectedTime] = useState<Date | null>(new Date());
   const saveRoom = useMoodStore((state) => state.saveRoom);
-  const resetFilter = useSearchFilterStore((s)=> s.clearFilters)
 
   // save data
   const [state, formAction, isPending] = useActionState(
@@ -115,40 +120,21 @@ export default function MoodForm() {
                   htmlFor={`mood-${item.id}`}
                   className={clsx(
                     "cursor-pointer flex justify-center p-3 md:text-3xl border border-gray-300 transition duration-300 rounded-full shadow bg-white",
-                    {
-                      "text-[#44c5a6] hover:bg-[#44c5a6]/10 hover:text-[#44c5a6] peer-checked:bg-[#44c5a6] peer-checked:text-white":
-                        item.id === 1,
-                      "text-[#a4d756] hover:bg-[#a4d756]/10 hover:text-[#a4d756] peer-checked:bg-[#a4d756] peer-checked:text-white":
-                        item.id === 2,
-                      "text-[#71b5dc] hover:bg-[#71b5dc]/10 hover:text-[#71b5dc] peer-checked:bg-[#71b5dc] peer-checked:text-white":
-                        item.id === 3,
-                      "text-[#f9a44a] hover:bg-[#f9a44a]/10 hover:text-[#f9a44a] peer-checked:bg-[#f9a44a] peer-checked:text-white":
-                        item.id === 4,
-                      "text-[#f5586b] hover:bg-[#f5586b]/10 hover:text-[#f5586b] peer-checked:bg-[#f5586b] peer-checked:text-white":
-                        item.id === 5,
-                    }
+                    moodClassesIcon[item.id]
                   )}
                 >
                   <MoodIcon mood={item.id} className="size-8" />
                 </label>
 
                 {/* TEKS */}
-                <label htmlFor={`mood-${item.id}`} className={clsx(
-                      "capitalize text-sm w-[80%] text-center transition duration-200 text-gray-600 mt-1",
-                      {
-                        "group-hover:text-[#44c5a6] peer-checked:text-[#44c5a6]":
-                          item.id === 1,
-                        "group-hover:text-[#a4d756] peer-checked:text-[#a4d756]":
-                          item.id === 2,
-                        "group-hover:text-[#71b5dc] peer-checked:text-[#71b5dc]":
-                          item.id === 3,
-                        "group-hover:text-[#f9a44a] peer-checked:text-[#f9a44a]":
-                          item.id === 4,
-                        "group-hover:text-[#f5586b] peer-checked:text-[#f5586b]":
-                          item.id === 5,
-                      }
-                    )}>
-                    {item.name}
+                <label
+                  htmlFor={`mood-${item.id}`}
+                  className={clsx(
+                    "capitalize text-sm w-[80%] text-center transition duration-200 text-gray-600 mt-1",
+                    moodClassesText[item.id]
+                  )}
+                >
+                  {item.name}
                 </label>
               </div>
             ))}

@@ -1,5 +1,5 @@
 "use client";
-import { moodData } from "@/app/data";
+import { moodData, moodTextColors } from "@/app/data";
 import clsx from "clsx";
 import Link from "next/link";
 import { MoodIcon } from "@/components/mood-icons";
@@ -17,13 +17,7 @@ export function MoodSelector() {
               href={`/mood/add?moodId=${item.id}`}
               className={clsx(
                 "cursor-pointer flex justify-center p-3 md:text-3xl border border-gray-300 transition duration-300 rounded-full shadow bg-white hover:scale-105",
-                {
-                  "text-[#44c5a6]": item.id === 1,
-                  "text-[#a4d756]": item.id === 2,
-                  "text-[#71b5dc]": item.id === 3,
-                  "text-[#f9a44a]": item.id === 4,
-                  "text-[#f5586b]": item.id === 5,
-                }
+                moodTextColors[item.id]
               )}
             >
               <MoodIcon mood={item.id} className="size-8" />
@@ -33,13 +27,7 @@ export function MoodSelector() {
               <span
                 className={clsx(
                   "capitalize text-sm w-[80%] text-center mt-1",
-                  {
-                    "text-[#44c5a6]": item.id === 1,
-                    "text-[#a4d756]": item.id === 2,
-                    "text-[#71b5dc]": item.id === 3,
-                    "text-[#f9a44a]": item.id === 4,
-                    "text-[#f5586b]": item.id === 5,
-                  }
+                  moodTextColors[item.id]
                 )}
               >
                 {item.name}

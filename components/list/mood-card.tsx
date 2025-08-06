@@ -10,11 +10,17 @@ import { MoodMenu } from "@/components/list/mood-menu";
 
 interface MoodCardProps {
   mood: MoodProps;
-  onEdit: (id: string) => void;
-  onShowDetail: (mood: MoodProps) => void;
+  onEdit?: (id: string) => void;
+  onShowDetail?: (mood: MoodProps) => void;
+  detail: boolean;
 }
 
-export function MoodCard({ mood, onEdit, onShowDetail }: MoodCardProps) {
+export function MoodCard({
+  mood,
+  onEdit,
+  onShowDetail,
+  detail = false,
+}: MoodCardProps) {
   const deleteMood = useMoodStore((state) => state.deleteMood);
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -45,27 +51,35 @@ export function MoodCard({ mood, onEdit, onShowDetail }: MoodCardProps) {
         <div className="flex-1">
           <MoodHeader mood={mood.mood} time={mood.jam} />
           <MoodTags cuaca={mood.cuaca} emosi={mood.emosi} />
-          <MoodNote
-            note={shortNote}
-            isLongNote={!!(shortNote && shortNote.length > 100)}
-            onShowDetail={() => onShowDetail(mood)}
-          />
+          {detail ? (
+            <p className="text-sm text-gray-600 mt-2">{mood.catatan}</p>
+          ) : (
+            <MoodNote
+              note={mood.catatan}
+              isLongNote={!!(shortNote && shortNote.length > 100)}
+              onShowDetail={() => onShowDetail?.(mood)}
+            />
+          )}
         </div>
       </div>
 
-      <MoodMenu
-        isOpen={openMenuId === mood.id}
-        onToggle={() => setOpenMenuId(openMenuId === mood.id ? null : mood.id)}
-        onEdit={() => {
-          onEdit(mood.id);
-          setOpenMenuId(null);
-        }}
-        onDelete={() => {
-          deleteMood(mood.id);
-          setOpenMenuId(null);
-        }}
-        ref={menuRef}
-      />
+      {!detail && (
+        <MoodMenu
+          isOpen={openMenuId === mood.id}
+          onToggle={() =>
+            setOpenMenuId(openMenuId === mood.id ? null : mood.id)
+          }
+          onEdit={() => {
+            onEdit?.(mood.id);
+            setOpenMenuId(null);
+          }}
+          onDelete={() => {
+            deleteMood(mood.id);
+            setOpenMenuId(null);
+          }}
+          ref={menuRef}
+        />
+      )}
     </div>
   );
 }

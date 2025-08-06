@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { MoodIcon } from "@/components/mood-icons";
+import { moodTextColors } from "@/app/data";
 
 interface MoodIconDisplayProps {
   mood: string;
@@ -11,13 +12,7 @@ export function MoodIconDisplay({ mood }: MoodIconDisplayProps) {
       <div
         className={clsx(
           "text-2xl font-bold flex items-center gap-2",
-          {
-            "text-[#44c5a6]": mood === "1",
-            "text-[#a4d756]": mood === "2",
-            "text-[#71b5dc]": mood === "3",
-            "text-[#f9a44a]": mood === "4",
-            "text-[#f5586b]": mood === "5",
-          }
+          moodTextColors[mood]
         )}
       >
         <MoodIcon mood={mood} className="size-8" />

@@ -1,10 +1,6 @@
 "use client";
 import { useRef, useEffect } from "react";
-import clsx from "clsx";
 import { useSearchFilterStore } from "@/lib/action";
-import { HiMiniMagnifyingGlass } from "react-icons/hi2";
-import { EmosiIcon, CuacaIcon } from "@/components/mood-icons";
-import { emosiData, cuacaData } from "@/app/data";
 import { SearchInput } from "@/components/head/search-input";
 import { FilterTags } from "@/components/head/filter-tags";
 
@@ -15,7 +11,7 @@ interface SearchModalProps {
 
 export function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
-  
+
   // Store hooks
   const query = useSearchFilterStore((s) => s.query);
   const setQuery = useSearchFilterStore((s) => s.setQuery);

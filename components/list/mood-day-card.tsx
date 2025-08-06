@@ -9,7 +9,12 @@ interface MoodDayCardProps {
   onShowDetail: (mood: MoodProps) => void;
 }
 
-export function MoodDayCard({ date, moods, onEdit, onShowDetail }: MoodDayCardProps) {
+export function MoodDayCard({
+  date,
+  moods,
+  onEdit,
+  onShowDetail,
+}: MoodDayCardProps) {
   return (
     <div className="relative h-fit rounded-lg shadow transition hover:shadow-lg opacity-0 animate-[fadeSlideIn_0.5s_forwards] mb-1 bg-white">
       {/* Header Tanggal */}
@@ -28,6 +33,7 @@ export function MoodDayCard({ date, moods, onEdit, onShowDetail }: MoodDayCardPr
             mood={mood}
             onEdit={onEdit}
             onShowDetail={onShowDetail}
+            detail={false}
           />
         ))}
       </div>

@@ -141,7 +141,10 @@ export const useMonthLabelOptions = () => {
     new Set(
       moods.map((item) => {
         const d = new Date(item.tanggal);
-        return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+        return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(
+          2,
+          "0"
+        )}`;
       })
     )
   ).sort();
@@ -157,4 +160,28 @@ export const useMonthLabelOptions = () => {
   });
 
   return monthOptions;
+};
+
+export const moodTextColors: Record<string, string> = {
+  "1": "text-[#44c5a6]",
+  "2": "text-[#a4d756]",
+  "3": "text-[#71b5dc]",
+  "4": "text-[#f9a44a]",
+  "5": "text-[#f5586b]",
+};
+
+export const moodClassesIcon: Record<string, string> = {
+  "1": "text-[#44c5a6] hover:bg-[#44c5a6]/10 hover:text-[#44c5a6] peer-checked:bg-[#44c5a6] peer-checked:text-white",
+  "2": "text-[#a4d756] hover:bg-[#a4d756]/10 hover:text-[#a4d756] peer-checked:bg-[#a4d756] peer-checked:text-white",
+  "3": "text-[#71b5dc] hover:bg-[#71b5dc]/10 hover:text-[#71b5dc] peer-checked:bg-[#71b5dc] peer-checked:text-white",
+  "4": "text-[#f9a44a] hover:bg-[#f9a44a]/10 hover:text-[#f9a44a] peer-checked:bg-[#f9a44a] peer-checked:text-white",
+  "5": "text-[#f5586b] hover:bg-[#f5586b]/10 hover:text-[#f5586b] peer-checked:bg-[#f5586b] peer-checked:text-white",
+};
+
+export const moodClassesText: Record<string, string> = {
+  "1": "group-hover:text-[#44c5a6] peer-checked:text-[#44c5a6]",
+  "2": "group-hover:text-[#a4d756] peer-checked:text-[#a4d756]",
+  "3": "group-hover:text-[#71b5dc] peer-checked:text-[#71b5dc]",
+  "4": "group-hover:text-[#f9a44a] peer-checked:text-[#f9a44a]",
+  "5": "group-hover:text-[#f5586b] peer-checked:text-[#f5586b]",
 };
