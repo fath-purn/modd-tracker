@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { MoodProps } from "@/types/mood";
-import DetailMood from "@/components/detail-mood";
+import DetailMood from "@/components/list/detail-mood";
 
 interface DetailMoodModalProps {
   mood: MoodProps | null;
@@ -22,10 +22,7 @@ export function DetailMoodModal({ mood, onClose }: DetailMoodModalProps) {
         className="bg-white pb-6 rounded-lg w-full max-w-[90%] md:max-w-lg relative"
         onClick={(e) => e.stopPropagation()}
       >
-        <DetailMood
-          detailMood={mood}
-          closeModal={onClose}
-        />
+        <DetailMood detailMood={mood} closeModal={onClose} />
       </div>
     </div>
   );

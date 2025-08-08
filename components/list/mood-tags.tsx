@@ -9,7 +9,7 @@ interface MoodTagsProps {
 export function MoodTags({ cuaca, emosi }: MoodTagsProps) {
   return (
     <div className="flex flex-wrap items-center mt-2">
-      {/* Cuaca Tags */}
+      {/* Cuaca tag */}
       {cuaca?.map((id: string) => {
         const label = cuacaData.find((e) => String(e.id) === id);
         return (
@@ -23,7 +23,7 @@ export function MoodTags({ cuaca, emosi }: MoodTagsProps) {
         );
       })}
 
-      {/* Emosi Tags */}
+      {/* Emosi tag */}
       {emosi?.map((id: string) => {
         const label = emosiData.find((e) => String(e.id) === id);
         return (

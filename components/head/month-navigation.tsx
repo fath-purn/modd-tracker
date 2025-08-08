@@ -38,9 +38,12 @@ export function MonthNavigation({ onSearchClick }: MonthNavigationProps) {
   return (
     <div className="mb-6 md:mb-0 flex mx-auto w-full justify-center items-start">
       <div className="flex items-center gap-3 w-full md:w-fit">
+        {/* Search */}
         <SearchButton onClick={onSearchClick} />
 
+        {/* Filter berdasarkan bulan */}
         <div className="flex items-center justify-between md:gap-4 bg-white shadow-md rounded-full px-2.5 py-2 w-full md:w-fit mx-auto">
+          {/* Tombol kiri */}
           <button
             onClick={handlePrev}
             disabled={currentIndex === 0}
@@ -56,13 +59,14 @@ export function MonthNavigation({ onSearchClick }: MonthNavigationProps) {
 
           {/* Menampilkan bulan */}
           <span className="text-lg font-semibold hidden md:block">
-            {months[currentIndex]?.label.slice(0, 4)}
+            {months[currentIndex]?.label.slice(0, 5)}
           </span>
 
           <span className="text-lg font-semibold block md:hidden">
             {months[currentIndex]?.label}
           </span>
 
+          {/* Tombol kanan */}
           <button
             onClick={handleNext}
             disabled={currentIndex === months.length - 1}

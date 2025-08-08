@@ -36,31 +36,31 @@ export function EmosiIcon({
 
   switch (emosiStr) {
     case "1":
-      return <MdSentimentSatisfiedAlt className={className} />;
+      return <MdSentimentSatisfiedAlt className={className} />; // senang
     case "2":
-      return <FaBolt className={className} />;
+      return <FaBolt className={className} />; // bersemangat
     case "3":
-      return <FaPrayingHands className={className} />;
+      return <FaPrayingHands className={className} />; // bersyukur
     case "4":
-      return <LuCoffee className={className} />;
+      return <LuCoffee className={className} />; // santai
     case "5":
-      return <MdEmojiEmotions className={className} />;
+      return <MdEmojiEmotions className={className} />; // puas
     case "6":
-      return <MdBatteryAlert className={className} />;
+      return <MdBatteryAlert className={className} />; // lelah
     case "7":
-      return <MdHelpOutline className={className} />;
+      return <MdHelpOutline className={className} />; // bingung
     case "8":
-      return <MdSentimentNeutral className={className} />;
+      return <MdSentimentNeutral className={className} />; // bosan
     case "9":
-      return <MdOutlineSentimentDissatisfied className={className} />;
+      return <MdOutlineSentimentDissatisfied className={className} />; // cemas
     case "10":
-      return <MdSentimentVeryDissatisfied className={className} />;
+      return <MdSentimentVeryDissatisfied className={className} />; // marah
     case "11":
-      return <BiBrain className={className} />;
+      return <BiBrain className={className} />; // stres
     case "12":
-      return <MdSentimentDissatisfied className={className} />;
+      return <MdSentimentDissatisfied className={className} />; // sedih
     case "13":
-      return <FaSadTear className={className} />;
+      return <FaSadTear className={className} />; // badmood
     default:
       return null;
   }
@@ -77,15 +77,15 @@ export function MoodIcon({
 
   switch (moodStr) {
     case "5":
-      return <MdSentimentVeryDissatisfied className={className} />;
+      return <MdSentimentVeryDissatisfied className={className} />; // keren
     case "4":
-      return <MdSentimentDissatisfied className={className} />;
+      return <MdSentimentDissatisfied className={className} />; // baik
     case "3":
-      return <MdSentimentNeutral className={className} />;
+      return <MdSentimentNeutral className={className} />; // biasa
     case "2":
-      return <MdSentimentSatisfied className={className} />;
+      return <MdSentimentSatisfied className={className} />; // buruk
     case "1":
-      return <MdSentimentVerySatisfied className={className} />;
+      return <MdSentimentVerySatisfied className={className} />; // parah
     default:
       return null;
   }

@@ -11,16 +11,17 @@ export function MoodSelector() {
         Bagaimana kabarmu sekarang?
       </h1>
       <div className="grid grid-cols-5 mx-auto mt-6">
+        {/* Akses tambah mood */}
         {moodData.map((item) => (
-          <div key={item.id} className="flex flex-col items-center mb-4">
+          <div key={item.id} className="flex flex-col items-center mb-4 gap-2">
             <Link
               href={`/mood/add?moodId=${item.id}`}
               className={clsx(
-                "cursor-pointer flex justify-center p-3 md:text-3xl border border-gray-300 transition duration-300 rounded-full shadow bg-white hover:scale-105",
+                "cursor-pointer flex justify-center p-2.5 md:text-3xl border border-gray-300 transition duration-300 rounded-full shadow bg-white hover:scale-105",
                 moodTextColors[item.id]
               )}
             >
-              <MoodIcon mood={item.id} className="size-8" />
+              <MoodIcon mood={item.id} className="size-7 md:size-8" />
             </Link>
 
             <Link href={`/mood/add?moodId=${item.id}`}>

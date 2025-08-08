@@ -18,6 +18,7 @@ export function FilterTags({
   return (
     <div className="mt-3">
       <div className="flex flex-wrap gap-2">
+        {/* filter berdasarkan emosi */}
         {emosiData.map((item) => (
           <button
             key={item.id}
@@ -33,6 +34,8 @@ export function FilterTags({
             <span>{item.name}</span>
           </button>
         ))}
+
+        {/* filter berdasarkan cuaca */}
         {cuacaData.map((item) => (
           <button
             key={item.id}

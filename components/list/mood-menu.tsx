@@ -11,7 +11,7 @@ export const MoodMenu = forwardRef<HTMLDivElement, MoodMenuProps>(
   ({ isOpen, onToggle, onEdit, onDelete }, ref) => {
     return (
       <>
-        {/* Menu Dropdown */}
+        {/* Menu dropdown */}
         {isOpen && (
           <div
             ref={ref}
@@ -32,7 +32,7 @@ export const MoodMenu = forwardRef<HTMLDivElement, MoodMenuProps>(
           </div>
         )}
 
-        {/* Toggle Button */}
+        {/* Toggle button */}
         <button
           onClick={onToggle}
           className="text-gray-400 hover:text-gray-700 absolute top-0 right-0 p-2"

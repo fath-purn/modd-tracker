@@ -51,6 +51,8 @@ export function MoodCard({
         <div className="flex-1">
           <MoodHeader mood={mood.mood} time={mood.jam} />
           <MoodTags cuaca={mood.cuaca} emosi={mood.emosi} />
+
+          {/* Catatan */}
           {detail ? (
             <p className="text-sm text-gray-600 mt-2">{mood.catatan}</p>
           ) : (
@@ -63,6 +65,7 @@ export function MoodCard({
         </div>
       </div>
 
+      {/* Menu edit dan delete */}
       {!detail && (
         <MoodMenu
           isOpen={openMenuId === mood.id}

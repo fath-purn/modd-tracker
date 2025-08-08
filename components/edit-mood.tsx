@@ -141,7 +141,7 @@ export default function MoodEditForm({
                 >
                   <MoodIcon mood={item.id} className="size-8" />
                 </label>
-                <label htmlFor={`cuaca-${item.id}`}>
+                <label htmlFor={`mood-${item.id}`}>
                   <span
                     className={clsx(
                       "capitalize text-sm w-[80%] text-center text-[#44c5a6]",
