@@ -2,6 +2,8 @@
 
 Ini adalah aplikasi sederhana untuk melacak suasana hati (mood) harian yang dibangun menggunakan Next.js. Pengguna dapat mencatat suasana hati mereka beserta cuaca, emosi yang dirasakan, dan catatan tambahan. Aplikasi ini juga menyediakan fitur untuk memfilter dan mencari entri berdasarkan kriteria tertentu.
 
+Demo hasil: https://modd-tracker.vercel.app
+
 ## ✨ Fitur Utama
 
 - 📝 **Pencatatan Mood:** Catat suasana hati harian lengkap dengan jam, cuaca, emosi, dan catatan.
