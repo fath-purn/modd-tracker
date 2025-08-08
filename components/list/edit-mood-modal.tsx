@@ -29,7 +29,7 @@ export function EditMoodModal({ editingId, onClose }: EditMoodModalProps) {
         </button>
         <h3 className="text-xl font-semibold mb-4">Edit Mood</h3>
         {/* Form edit */}
-        <div className="overflow-y-auto relative max-h-[80vh] mb-3">
+        <div className="overflow-y-auto relative max-h-[70vh] mb-3">
           <MoodEditForm id={editingId} onSuccess={onClose} />
         </div>
       </div>

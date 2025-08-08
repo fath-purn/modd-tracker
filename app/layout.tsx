@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Raleway } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/navbar";
-// import Footer from "@/components/footer";
 
-const raleway = Raleway({
-  variable: "--font-raleway",
+const poppins = Poppins({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-poppins",
 });
 
 export const metadata: Metadata = {
@@ -23,10 +23,9 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${raleway.className} antialisaed`}>
+      <body className={`${poppins.className} antialiased`}>
         <Navbar />
         <main className="bg-gray-50 min-h-screen">{children}</main>
-        {/* <Footer /> */}
       </body>
     </html>
   );

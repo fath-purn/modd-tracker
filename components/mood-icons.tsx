@@ -56,11 +56,11 @@ export function EmosiIcon({
     case "10":
       return <MdSentimentVeryDissatisfied className={className} />; // marah
     case "11":
-      return <BiBrain className={className} />; // stres
-    case "12":
-      return <MdSentimentDissatisfied className={className} />; // sedih
-    case "13":
       return <FaSadTear className={className} />; // badmood
+    case "12":
+      return <BiBrain className={className} />; // stres
+    case "13":
+      return <MdSentimentDissatisfied className={className} />; // sedih
     default:
       return null;
   }

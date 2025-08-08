@@ -135,11 +135,11 @@ export default function MoodEditForm({
                 <label
                   htmlFor={`mood-${item.id}`}
                   className={clsx(
-                    "cursor-pointer flex justify-center p-3 md:text-3xl border border-gray-300 transition duration-300 rounded-full hadow bg-white peer-checked/mood:text-white",
+                    "cursor-pointer flex justify-center p-2 md:p-3 md:text-3xl border border-gray-300 transition duration-300 rounded-full hadow bg-white peer-checked/mood:text-white",
                     moodClassesIcon[item.id]
                   )}
                 >
-                  <MoodIcon mood={item.id} className="size-8" />
+                  <MoodIcon mood={item.id} className="size-6 md:sze-8" />
                 </label>
                 <label htmlFor={`mood-${item.id}`}>
                   <span
@@ -169,7 +169,7 @@ export default function MoodEditForm({
           <label className="block mb-2 text-sm font-medium text-gray-900">
             Cuaca
           </label>
-          <div className="grid grid-cols-5 gap-3">
+          <div className="grid md:grid-cols-4 grid-cols-5 gap-3">
             {cuacaData.map((item) => (
               <div key={item.id} className="flex flex-col items-center mb-4">
                 <input
@@ -183,9 +183,9 @@ export default function MoodEditForm({
 
                 <label
                   htmlFor={`cuaca-${item.id}`}
-                  className="cursor-pointer flex justify-center p-3 md:text-3xl border border-gray-300 transition duration-300 rounded-full hadow bg-white text-[#44c5a6] peer-checked/cuaca:bg-[#44c5a6] peer-checked/cuaca:text-white"
+                  className="cursor-pointer flex justify-center p-2 md:p-3 md:text-3xl border border-gray-300 transition duration-300 rounded-full hadow bg-white text-[#44c5a6] peer-checked/cuaca:bg-[#44c5a6] peer-checked/cuaca:text-white"
                 >
-                  <CuacaIcon cuaca={item.id} className="size-8" />
+                  <CuacaIcon cuaca={item.id} className="size-6 md:size-8" />
                 </label>
                 <label htmlFor={`cuaca-${item.id}`}>
                   <span className="capitalize text-sm w-[80%] text-center text-[#44c5a6]">
@@ -215,7 +215,7 @@ export default function MoodEditForm({
           <label className="block mb-2 text-sm font-medium text-gray-900">
             Emosi
           </label>
-          <div className="grid grid-cols-5 gap-3">
+          <div className="grid grid-cols-4 md:grid-cols-5 gap-3">
             {emosiData.map((item) => (
               <div key={item.id} className="flex flex-col items-center mb-4">
                 <input
@@ -229,9 +229,9 @@ export default function MoodEditForm({
 
                 <label
                   htmlFor={`emosi-${item.id}`}
-                  className="cursor-pointer flex justify-center p-3 md:text-3xl border border-gray-300 transition duration-300 rounded-full hadow bg-white text-[#44c5a6] peer-checked/emosi:bg-[#44c5a6] peer-checked/emosi:text-white"
+                  className="cursor-pointer flex justify-center p-2 md:p-3 md:text-3xl border border-gray-300 transition duration-300 rounded-full hadow bg-white text-[#44c5a6] peer-checked/emosi:bg-[#44c5a6] peer-checked/emosi:text-white"
                 >
-                  <EmosiIcon emosi={item.id} className="size-8" />
+                  <EmosiIcon emosi={item.id} className="size-6 md:size-8" />
                 </label>
                 <label htmlFor={`emosi-${item.id}`}>
                   <span className="capitalize text-sm w-[80%] text-center text-[#44c5a6]">

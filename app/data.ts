@@ -66,7 +66,7 @@ export const emosiData = [
   },
   {
     id: 2,
-    name: "Bersemangat",
+    name: "Semangat",
   },
   {
     id: 3,
@@ -102,15 +102,15 @@ export const emosiData = [
   },
   {
     id: 11,
-    name: "Stres",
+    name: "Badmood",
   },
   {
     id: 12,
-    name: "Sedih",
+    name: "Stres",
   },
   {
     id: 13,
-    name: "Badmood",
+    name: "Sedih",
   },
 ];
 

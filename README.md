@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aplikasi Pelacak Mood (Mood Tracking App)
 
-## Getting Started
+Ini adalah aplikasi sederhana untuk melacak suasana hati (mood) harian yang dibangun menggunakan Next.js. Pengguna dapat mencatat suasana hati mereka beserta cuaca, emosi yang dirasakan, dan catatan tambahan. Aplikasi ini juga menyediakan fitur untuk memfilter dan mencari entri berdasarkan kriteria tertentu.
 
-First, run the development server:
+## ✨ Fitur Utama
+
+- 📝 **Pencatatan Mood:** Catat suasana hati harian lengkap dengan jam, cuaca, emosi, dan catatan.
+- 📅 **Riwayat Terorganisir:** Lihat riwayat entri yang dikelompokkan berdasarkan tanggal.
+- 🔍 **Filter & Pencarian:** Saring entri berdasarkan bulan, cuaca, dan emosi. Cari catatan spesifik dengan mudah.
+- 📱 **Desain Responsif:** Tampilan yang dapat menyesuaikan dengan berbagai ukuran layar.
+
+## 🛠️ Teknologi yang Digunakan
+
+- **Framework:** Next.js
+- **Bahasa:** TypeScript
+- **Manajemen State:** Zustand
+- **Styling:** Tailwind CSS
+- **Validasi Skema:** Zod
+- **Utilitas Tanggal:** date-fns
+- **Font:** Poppins
+
+## 🚀 Instalasi & Menjalankan Proyek
+
+Untuk menjalankan proyek ini di lingkungan lokal Anda, ikuti langkah-langkah berikut:
+
+### 1. Prasyarat
+
+Pastikan Anda telah menginstal [Node.js](https://nodejs.org/) (disarankan versi LTS) dan `npm` (atau `yarn`/`pnpm`) di mesin Anda.
+
+### 2. Kloning Repositori
+
+Gunakan `git` untuk mengkloning repositori ini ke komputer Anda.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/fath-purn/mood-tracking.git
+
+cd mood-tracking
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Instalasi Dependensi
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Instal semua paket yang dibutuhkan oleh proyek dengan menjalankan perintah berikut di terminal:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm install
+```
 
-## Learn More
+### 4. Menjalankan Server Pengembangan
 
-To learn more about Next.js, take a look at the following resources:
+Setelah semua dependensi terinstal, jalankan server pengembangan:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run dev 
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 5. Buka Aplikasi
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Buka http://localhost:3000 di browser Anda untuk melihat aplikasi berjalan.
